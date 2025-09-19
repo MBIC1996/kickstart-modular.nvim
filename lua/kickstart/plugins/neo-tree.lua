@@ -15,6 +15,8 @@ return {
   },
   opts = {
     filesystem = {
+      follow_current_file = true, -- highlights the current file
+      use_libuv_file_watcher = true,
       window = {
         mappings = {
           ['\\'] = 'close_window',

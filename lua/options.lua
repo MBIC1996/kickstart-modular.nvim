@@ -72,3 +72,44 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 
 -- vim: ts=2 sts=2 sw=2 et
+if vim.fn.has 'win32' == 1 then
+  vim.opt.shell = [["C:\Program Files\PowerShell\7\pwsh.exe"]]
+  vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
+  vim.opt.shellquote = ''
+  vim.opt.shellxquote = ''
+end
+-- General
+vim.opt.backup = false -- creates file backup
+vim.opt.cmdheight = 2 -- makes command line bigger/easier to read
+vim.opt.completeopt = { 'menuone', 'noselect' } -- Makes cmp less clunky
+vim.opt.conceallevel = 0 -- Makes markdown backticks visible?
+vim.opt.swapfile = false -- Disable swap files
+vim.opt.undofile = true -- Enable persistent undo
+vim.opt.writebackup = false -- Disable write backups
+vim.opt.shortmess:append 'c' -- Avoid showing extra messages during completion
+vim.opt.fileencoding = 'utf-8' -- Default file encoding
+
+-- Tab Settings
+vim.opt.tabstop = 3 -- Number of spaces for a tab
+vim.opt.shiftwidth = 3 -- Spaces to use for each step of (auto)indent
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.smartindent = true -- Make indenting smarter
+vim.opt.showtabline = 2
+
+-- Appearance
+vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
+vim.opt.numberwidth = 4 -- Set number column width
+vim.opt.wrap = false -- Display lines as one long line
+vim.opt.laststatus = 2 -- Always show the statusline
+
+-- Search Settings
+vim.opt.incsearch = true -- Show match as you type
+vim.opt.hlsearch = true -- Highlight all matches of previous search
+
+-- Autocommands
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'vhdl',
+  callback = function()
+    vim.bo.fileencoding = 'ascii' -- Use ASCII encoding for VHDL files per SRC standards
+  end,
+})
